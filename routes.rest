@@ -1,0 +1,72 @@
+# CHICKEN COLLECTION
+
+### Get all chickens records
+GET http://localhost:3000/farm/chickens
+
+### Get a specific chicken record
+GET http://localhost:3000/farm/chickens/6aabd01b79a7c02f5778bcb6
+
+### Create a new chicken record
+POST http://localhost:3000/farm/chickens
+Content-Type: application/json
+
+{
+  "tagId": "CH002",
+  "breed": "Leghorn",
+  "hatchDate": "2023-02-20",
+  "gender": "Male",
+  "weight": 2.8,
+  "healthStatus": "Healthy",
+  "coopId": "COOP002"
+}
+
+### Update a chicken record
+PUT http://localhost:3000/farm/chickens/6aabd01b79a7c02f5778bcb6
+Content-Type: application/json
+
+{
+  "tagId": "CH002",
+  "breed": "Leghorn",
+  "hatchDate": "2023-02-20",
+  "gender": "Male",
+  "weight": 2.9,
+  "healthStatus": "Healthy",
+  "coopId": "COOP002"
+}
+
+### Delete a chicken record
+DELETE http://localhost:3000/farm/chickens/6aabd01b79a7c02f5778bcb6
+
+# EGGS COLLECTION
+
+### Get all eggs records
+GET http://localhost:3000/farm/eggs
+
+### Get a specific egg record
+GET http://localhost:3000/farm/eggs/6aac6d540d67977018128533
+
+### Create a new egg record
+POST http://localhost:3000/farm/eggs
+Content-Type: application/json
+
+{
+   "chickenId": "CH004",
+  "layDate": "2024-02-21",
+  "weight": 48,
+  "grade": "C",
+  "quality": "Old",
+  "sold": true,
+  "price": 0.15
+}
+
+### Update an egg record
+PUT http://localhost:3000/farm/eggs/6aabd01b79a7c02f5778bcb6
+Content-Type: application/json
+
+{
+  "weight": 0.065,
+  "quality": "Grade A"
+}
+
+### Delete an egg record
+DELETE http://localhost:3000/farm/eggs/6aabd01b79a7c02f5778bcb6
