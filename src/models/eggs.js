@@ -8,7 +8,7 @@ const eggSchema = new Schema(
     layDate: { type: Date, required: true },
     weight: { type: Number, required: true }, // in grams
     grade: { type: String, enum: ['A', 'B', 'C'], required: true },
-    quality: { type: String, required: true }, // Clean, Cracked, Dirty
+    quality: { type: String, enum: ['fresh', 'old'], required: true },
     sold: { type: Boolean, default: false, required: true },
     price: { type: Number, required: true } // price per egg
   },

@@ -4,38 +4,39 @@
 GET http://localhost:3000/farm/chickens
 
 ### Get a specific chicken record
-GET http://localhost:3000/farm/chickens/6aabd01b79a7c02f5778bcb6
+GET http://localhost:3000/farm/chickens/6aadb37606250be392ee5ac3
+
 
 ### Create a new chicken record
-POST http://localhost:3000/farm/chickens
+POST http://localhost:3000/farm/chickens HTTP/1.1
 Content-Type: application/json
 
 {
-  "tagId": "CH002",
-  "breed": "Leghorn",
-  "hatchDate": "2023-02-20",
-  "gender": "Male",
-  "weight": 2.8,
+  "tagId": "CH005",
+  "breed": "Wyandotte",
+  "hatchDate": "2023-02-25",
+  "gender": "female",
+  "weight": 3,
   "healthStatus": "Healthy",
   "coopId": "COOP002"
 }
 
 ### Update a chicken record
-PUT http://localhost:3000/farm/chickens/6aabd01b79a7c02f5778bcb6
+PUT http://localhost:3000/farm/chickens/6aaee991b0c8d6c49091bdcf HTTP/1.1
 Content-Type: application/json
 
 {
-  "tagId": "CH002",
-  "breed": "Leghorn",
-  "hatchDate": "2023-02-20",
-  "gender": "Male",
-  "weight": 2.9,
+  "tagId": "CH005",
+  "breed": "Wyandotte",
+  "hatchDate": "2023-02-25",
+  "gender": "female",
+  "weight": 4,
   "healthStatus": "Healthy",
   "coopId": "COOP002"
 }
 
 ### Delete a chicken record
-DELETE http://localhost:3000/farm/chickens/6aabd01b79a7c02f5778bcb6
+DELETE http://localhost:3000/farm/chickens/6aadb37606250be392ee5ac3 HTTP/1.1
 
 # EGGS COLLECTION
 
@@ -46,27 +47,74 @@ GET http://localhost:3000/farm/eggs
 GET http://localhost:3000/farm/eggs/6aac6d540d67977018128533
 
 ### Create a new egg record
-POST http://localhost:3000/farm/eggs
+POST http://localhost:3000/farm/eggs HTTP/1.1
 Content-Type: application/json
 
 {
-   "chickenId": "CH004",
+  "chickenId": "CH005",
   "layDate": "2024-02-21",
   "weight": 48,
   "grade": "C",
-  "quality": "Old",
+  "quality": "old",
   "sold": true,
   "price": 0.15
 }
 
 ### Update an egg record
-PUT http://localhost:3000/farm/eggs/6aabd01b79a7c02f5778bcb6
+PUT http://localhost:3000/farm/eggs/6aac6c160d67977018128532 HTTP/1.1
 Content-Type: application/json
 
 {
-  "weight": 0.065,
-  "quality": "Grade A"
+  "chickenId": "CH003",
+  "layDate": "2024-02-25",
+  "weight": 4,
+  "grade": "A",
+  "quality": "fresh",
+  "sold": true,
+  "price": 0.19
 }
 
 ### Delete an egg record
-DELETE http://localhost:3000/farm/eggs/6aabd01b79a7c02f5778bcb6
+DELETE http://localhost:3000/farm/eggs/6aaeebf2b0c8d6c49091bdd2 HTTP/1.1
+
+
+
+### Get all feeds inventories
+GET http://localhost:3000/farm/feedInventory
+
+### Get a specific feed inventory
+GET http://localhost:3000/farm/feedInventory/6aac6d540d67977018128533
+
+### Create feed inventory
+
+POST http://localhost:3000/farm/feedInventory HTTP/1.1
+Content-Type: application/json
+
+{
+  "feedName": "Starter Feed",
+  "supplier": "Otas Farm Integrated Enterprise",
+  "purchaseDate": "2026-09-03",
+  "quantityKg": 250,
+  "cost": 185000,
+  "expiryDate": "2027-04-01",
+  "location": "Main Store"
+}
+### Update feed inventory
+PUT http://localhost:3000/farm/feedInventory/6aaefc8ccde3e5c3ef6c017c HTTP/1.1
+Content-Type: application/json
+
+{
+  
+  "feedName": "Layer mash Feed",
+  "supplier": "Otas Farm Integrated Enterprise",
+  "purchaseDate": "2026-09-03",
+  "quantityKg": 250,
+  "cost": 185000,
+  "expiryDate": "2027-04-01",
+  "location": "Main Store"
+
+}
+
+### Delete feed inventory
+DELETE http://localhost:3000/farm/feedInventory/6aaefd55cde3e5c3ef6c017d HTTP/1.1
+

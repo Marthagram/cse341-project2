@@ -1,5 +1,67 @@
 import Chicken from '../models/chickens.js';
 
+import { body } from 'express-validator';
+
+// Define validation and sanitization rules for organization form
+// Define validation rules for organization form
+export const chickenValidation = [
+  body('tagId')
+    .trim()
+    .notEmpty()
+    .withMessage('tagId is required')
+    .isAlphanumeric()
+    .withMessage('tagId must be alphanumeric')
+    .isLength({ min: 3, max: 15 })
+    .withMessage('tagId must be between 3 and 15 characters'),
+
+  body('breed')
+    .trim()
+    .notEmpty()
+    .withMessage('breed is required')
+    .isLength({ max: 50 })
+    .withMessage('breed cannot exceed 50 characters'),
+
+  body('hatchDate')
+    .notEmpty()
+    .withMessage('hatch date is required')
+    .isISO8601()
+    .withMessage('hatch date must be YYYY-MM-DD')
+    .custom((value) => {
+      if (new Date(value) > new Date()) {
+        throw new Error('hatch date cannot be in the future');
+      }
+      return true;
+    }),
+
+  body('gender')
+    .notEmpty()
+    .withMessage('gender is required')
+    .toLowerCase()
+    .isIn(['male', 'female'])
+    .withMessage('gender must be male or female'),
+
+  body('weight')
+    .notEmpty()
+    .withMessage('body weight is required')
+    .isFloat({ min: 0.1, max: 9 })
+    .withMessage('weight must be a number between 0.1 and 9 kg'),
+
+  body('healthStatus')
+    .trim()
+    .toLowerCase()
+    .notEmpty()
+    .withMessage('healthStatus is required')
+    .isIn(['healthy', 'sick', 'recovering', 'deceased'])
+    .withMessage('invalid healthStatus'),
+
+  body('coopId')
+    .trim()
+    .notEmpty()
+    .withMessage('coopId is required')
+    .isLength({ min: 3, max: 20 })
+    .withMessage('coopId must be 3-20 chars')
+];
+
 // create a new chicken record
 
 export async function createChicken(req, res) {

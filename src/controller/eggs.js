@@ -1,5 +1,46 @@
 import Egg from '../models/eggs.js';
 
+import { body } from 'express-validator';
+export const eggValidation = [
+  body('chickenId').trim().notEmpty().withMessage('chickenId is required'),
+
+  body('layDate')
+    .notEmpty()
+    .withMessage('layDate is required')
+    .isISO8601()
+    .withMessage('layDate must be a valid date'),
+
+  body('weight')
+    .notEmpty()
+    .withMessage('weight is required')
+    .isFloat({ min: 0 })
+    .withMessage('weight must be a number'),
+
+  body('grade')
+    .trim()
+    .notEmpty()
+    .toUpperCase()
+    .withMessage('Grade is required')
+    .isIn(['A', 'B', 'C'])
+    .withMessage('Grade must be A, B, or C'),
+
+  body('quality')
+    .trim()
+    .notEmpty()
+    .toLowerCase()
+    .withMessage('Quality is required')
+    .isIn(['fresh', 'old'])
+    .withMessage('Quality either "fresh" or "old" is required'),
+
+  body('price')
+    .notEmpty()
+    .withMessage('price is required')
+    .isFloat({ min: 0 })
+    .withMessage('price must be >= 0'),
+
+  body('sold').optional().isBoolean().withMessage('sold must be true or false')
+];
+
 // CREATE
 export const createEggRecord = async (req, res) => {
   try {
@@ -63,6 +104,7 @@ export async function updateEggRecord(req, res) {
     const updateER = await Egg.findByIdAndUpdate(
       req.params.id,
       {
+        chickenId: req.body.chickenId,
         layDate: req.body.layDate,
         weight: req.body.weight,
         grade: req.body.grade,
@@ -91,7 +133,7 @@ export async function deleteEggRecord(req, res) {
       return res.status(404).json({ message: 'Id not found' });
     }
 
-    res.status(200).json(deleteER);
+    res.status(204).json('No content');
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

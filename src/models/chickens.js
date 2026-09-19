@@ -6,7 +6,7 @@ const chickenSchema = new Schema(
     tagId: { type: String, required: true, unique: true },
     breed: { type: String, required: true },
     hatchDate: { type: Date, required: true },
-    gender: { type: String, enum: ['Male', 'Female'], required: true },
+    gender: { type: String, enum: ['male', 'female'], lowercase: true, required: true },
     weight: { type: Number, required: true },
     healthStatus: { type: String, required: true },
     coopId: { type: String, required: true }
