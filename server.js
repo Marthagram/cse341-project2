@@ -1,7 +1,7 @@
 import express from 'express';
 import connectDB from './src/models/connect.js';
 import farmRouter from './src/routes/farm.route.js';
-
+import swaggerRouter from './src/routes/swagger.js';
 const app = express();
 
 // Define the application environment
@@ -26,6 +26,7 @@ app.use((req, res, next) => {
 await connectDB();
 
 app.use('/farm', farmRouter);
+app.use('/', swaggerRouter);
 
 app.listen(PORT, () => {
   console.log(`Server is running at http://127.0.0.1:${PORT}`);
