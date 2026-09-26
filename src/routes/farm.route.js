@@ -1,5 +1,8 @@
 import express from 'express';
+
 import { checkValidation } from '../middleware/validation.js';
+import { isAuthenticated } from '../middleware/authenticate.js';
+
 import {
   getAllChickens,
   createChicken,
@@ -29,39 +32,37 @@ import {
 
 const farmRouter = express.Router();
 
-//  CHICKEN COLLECTION
-
+// ========== CHICKEN ==========
 farmRouter.get('/chickens', getAllChickens);
-
-farmRouter.post('/chickens', chickenValidation, checkValidation, createChicken);
-
+farmRouter.post('/chickens', isAuthenticated, chickenValidation, checkValidation, createChicken);
 farmRouter.get('/chickens/:id', getChickenById);
+farmRouter.put('/chickens/:id', isAuthenticated, chickenValidation, checkValidation, updateChicken);
+farmRouter.delete('/chickens/:id', isAuthenticated, deleteChicken);
 
-farmRouter.put('/chickens/:id', chickenValidation, checkValidation, updateChicken);
-
-farmRouter.delete('/chickens/:id', deleteChicken);
-
-// EGGS COLLECTION
+// ========== EGGS ==========
 farmRouter.get('/eggs', getAllEggRecord);
-
-farmRouter.post('/eggs', eggValidation, checkValidation, createEggRecord);
-
+farmRouter.post('/eggs', isAuthenticated, eggValidation, checkValidation, createEggRecord);
 farmRouter.get('/eggs/:id', getOneEggRecord);
+farmRouter.put('/eggs/:id', isAuthenticated, eggValidation, checkValidation, updateEggRecord);
+farmRouter.delete('/eggs/:id', isAuthenticated, deleteEggRecord);
 
-farmRouter.put('/eggs/:id', eggValidation, checkValidation, updateEggRecord);
-
-farmRouter.delete('/eggs/:id', deleteEggRecord);
-
-// FEED INVENTORY
-
-// FEED INVENTORY - CORRECTED
+// ========== FEED INVENTORY ==========
 farmRouter.get('/feedInventory', getAllFeedInventory);
-
-farmRouter.post('/feedInventory', feedValidation, checkValidation, createFeedInventory);
-
+farmRouter.post(
+  '/feedInventory',
+  isAuthenticated,
+  feedValidation,
+  checkValidation,
+  createFeedInventory
+);
 farmRouter.get('/feedInventory/:id', getOneFeedInventory);
+farmRouter.put(
+  '/feedInventory/:id',
+  isAuthenticated,
+  feedValidation,
+  checkValidation,
+  updateFeedInventory
+);
+farmRouter.delete('/feedInventory/:id', isAuthenticated, deleteFeedInventory);
 
-farmRouter.put('/feedInventory/:id', feedValidation, checkValidation, updateFeedInventory);
-
-farmRouter.delete('/feedInventory/:id', deleteFeedInventory);
 export default farmRouter;
