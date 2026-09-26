@@ -4,7 +4,6 @@ const router = express.Router();
 import swaggerRouter from './swagger.js';
 import farmRouter from './farm.route.js';
 
-
 router.use('/api-docs', swaggerRouter);
 router.use('/farm', farmRouter);
 
